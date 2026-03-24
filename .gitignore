@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+
+# Environment / secrets
+.env
+.env.*
+*.pem
+*.key
+
+# Local data (created at runtime)
+*.db
+data_cache/
+results/
+reports/
+eval_results/
+
+# Internal docs (not for public distribution)
+docs/plans/
+docs/insights_from_code.md
+docs/animated-banner-plan.md
+
+# IDE / editor
+.idea/
+.vscode/
+*.swp
+
+# Testing
+.pytest_cache/
+
+# OS
+.DS_Store
+Thumbs.db
