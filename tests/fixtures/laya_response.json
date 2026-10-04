@@ -1,0 +1,20 @@
+{
+  "model": "laya-fixture",
+  "routing": {"model": "english"},
+  "answers": {
+    "label": {
+      "type": "choice",
+      "choice": "negative",
+      "probabilities": {"positive": 0.1, "negative": 0.8, "neutral": 0.1},
+      "confidence": 0.74
+    },
+    "intensity": {
+      "type": "score",
+      "score": 1.2,
+      "legend": {"0": "none", "1": "mild", "2": "strong"},
+      "probabilities": {"0": 0.1, "1": 0.6, "2": 0.3},
+      "confidence": 0.55
+    },
+    "actionable": {"type": "noul", "noul": 0.91}
+  }
+}

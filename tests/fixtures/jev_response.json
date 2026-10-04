@@ -1,0 +1,19 @@
+{
+  "model": "jev-1.13.0",
+  "answers": {
+    "label": {
+      "type": "choice",
+      "choice": "negative",
+      "probabilities": {"negative": 0.7, "positive": 0.2, "neutral": 0.1},
+      "confidence": 0.66
+    },
+    "intensity": {
+      "type": "score",
+      "score": 1.4,
+      "legend": {"0": "none", "1": "mild", "2": "strong"},
+      "probabilities": {"0": 0.05, "1": 0.5, "2": 0.45},
+      "confidence": 0.4
+    },
+    "actionable": {"type": "noul", "noul": 0.8}
+  }
+}

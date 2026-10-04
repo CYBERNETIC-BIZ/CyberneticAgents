@@ -34,6 +34,10 @@ docs/animated-banner-plan.md
 # Testing
 .pytest_cache/
 
+# Local agent state (spend ledger, Jira markers). Never commit.
+.cybernetic/
+.cursor/hooks/state/
+
 # OS
 .DS_Store
 Thumbs.db

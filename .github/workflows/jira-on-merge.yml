@@ -1,0 +1,31 @@
+name: jira-on-merge
+
+on:
+  pull_request:
+    types: [closed]
+    branches:
+      - agent/main
+
+jobs:
+  done:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install the Jira monitor's only third-party import
+        run: python -m pip install typing-extensions
+      - name: Move linked Jira issues to Done
+        env:
+          JIRA_EMAIL: ${{ secrets.JIRA_EMAIL }}
+          JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
+          JIRA_SITE_URL: https://lgbongiolo.atlassian.net
+          JIRA_CLOUD_ID: b908f08c-773a-4389-beab-787b98d0bc37
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          PR_BODY: ${{ github.event.pull_request.body }}
+          PR_STATE: MERGED
+          GIT_BRANCH: ${{ github.event.pull_request.head.ref }}
+        run: python -m cybernetic.jira_monitor --event merged

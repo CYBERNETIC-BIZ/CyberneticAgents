@@ -11,6 +11,10 @@ def create_llm_client(
 ) -> BaseLLMClient:
     """Create an LLM client for the specified provider.
 
+    Chat providers only. Laya and Jev are System One decision engines in
+    ``cybernetic.decisions``, not chat models. Automated live calls go through
+    ``cybernetic.spend`` and tests that need a live model use ``gpt-5-nano``.
+
     Args:
         provider: LLM provider (openai, anthropic, google, xai, ollama, openrouter)
         model: Model name/identifier

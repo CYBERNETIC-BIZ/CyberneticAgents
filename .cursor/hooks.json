@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "hooks": {
+    "sessionStart": [
+      {
+        "command": "python3 .cursor/hooks/session_start.py",
+        "timeout": 20
+      }
+    ],
+    "beforeShellExecution": [
+      {
+        "command": "python3 .cursor/hooks/before_shell.py",
+        "timeout": 10,
+        "failClosed": true
+      }
+    ],
+    "afterFileEdit": [
+      {
+        "command": "python3 .cursor/hooks/after_file_edit.py",
+        "timeout": 20
+      }
+    ],
+    "stop": [
+      {
+        "command": "python3 .cursor/hooks/stop.py",
+        "timeout": 25
+      }
+    ]
+  }
+}

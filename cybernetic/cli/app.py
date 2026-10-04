@@ -3,6 +3,7 @@ import time
 import random
 import typer
 from pathlib import Path
+from typing import Optional
 from rich.console import Console
 from rich.panel import Panel
 from rich.align import Align
@@ -18,6 +19,7 @@ if _project_env.exists():
 else:
     load_dotenv(find_dotenv())
 
+from cybernetic.cli.decide_flow import execute_decide, prompt_and_decide
 from cybernetic.storage.db import init_db
 
 console = Console()
@@ -489,6 +491,21 @@ def reports():
     browse_reports()
 
 
+@app.command()
+def decide(
+    text: str = typer.Argument(..., help="Text for Laya and Jev to evaluate together"),
+    questions: Optional[Path] = typer.Option(
+        None,
+        "--questions",
+        exists=True,
+        dir_okay=False,
+        help="JSON object of typed choice, score, and noul questions. Defaults to the built-in set.",
+    ),
+):
+    """Show Laya and Jev decisions for the same text."""
+    execute_decide(text, questions)
+
+
 @app.callback(invoke_without_command=True)
 def main(ctx: typer.Context):
     """Interactive menu when no command is given."""
@@ -517,6 +534,8 @@ def main(ctx: typer.Context):
                 questionary.Separator("─── Research ─────────────────"),
                 questionary.Choice(" 🔬 Research a Ticker", value="research"),
                 questionary.Choice(" 📄 Previous Reports", value="reports"),
+                questionary.Separator("─── Decisions ────────────────"),
+                questionary.Choice(" ⚡ Decide with Laya and Jev", value="decide"),
                 questionary.Separator("─── Agents ───────────────────"),
                 questionary.Choice(" 🤖 Create Agent from Prompt", value="create_prompt"),
                 questionary.Choice(" 👥 My Agents", value="agents"),
@@ -576,6 +595,8 @@ def main(ctx: typer.Context):
         elif choice == "reports":
             from cybernetic.cli.reports import browse_reports
             browse_reports()
+        elif choice == "decide":
+            prompt_and_decide()
         elif choice == "config":
             from cybernetic.cli.config_flow import config_menu
             config_menu()
